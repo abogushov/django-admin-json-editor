@@ -1,0 +1,4 @@
+/*Delete Item Button style fix*/
+.submit-row a.deletelink {
+    height: 35px;
+}

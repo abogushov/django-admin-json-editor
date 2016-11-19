@@ -1,0 +1,21 @@
+<div id="{{ name }}_editor"></div>
+
+<script>
+    var container = document.getElementById("{{ name }}_editor");
+    var options = {
+        theme: 'bootstrap3',
+        iconlib: "fontawesome4",
+        schema: {{ schema|safe }}
+    };
+    var editor = new JSONEditor(container, options);
+    editor.on('change', function () {
+      var json = editor.getValue();
+      document.getElementById("id_{{ name }}").value = JSON.stringify(json);
+    });
+    {% if data %}
+    var json = {{ data|safe }};
+    editor.setValue(json)
+    {% endif %}
+</script>
+
+<textarea cols="40" id="id_{{ name }}" name="{{ name }}" rows="10" required="" style="display: none">{{ data|safe }}</textarea>
