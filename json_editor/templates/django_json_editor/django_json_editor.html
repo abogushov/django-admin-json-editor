@@ -7,14 +7,14 @@
         iconlib: "fontawesome4",
         schema: {{ schema|safe }}
     };
-    var editor = new JSONEditor(container, options);
-    editor.on('change', function () {
-      var json = editor.getValue();
+    var {{ name }}_editor = new JSONEditor(container, options);
+    {{ name }}_editor.on('change', function () {
+      var json = {{ name }}_editor.getValue();
       document.getElementById("id_{{ name }}").value = JSON.stringify(json);
     });
     {% if data %}
     var json = {{ data|safe }};
-    editor.setValue(json)
+    {{ name }}_editor.setValue(json)
     {% endif %}
 </script>
 
