@@ -7,8 +7,10 @@ Application adds support for editing JSONField in Django Administration via http
 Quick start
 -----------
 
-Add application to your INSTALLED_APPS setting like this ::
+Add application to your INSTALLED_APPS setting like this :
+
 .. code-block:: python
+
     INSTALLED_APPS = [
         ...
         'json_editor',
