@@ -8,7 +8,6 @@ Quick start
 -----------
 
 Add application to your INSTALLED_APPS setting like this ::
-
 .. code-block:: python
     INSTALLED_APPS = [
         ...
