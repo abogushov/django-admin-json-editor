@@ -9,12 +9,15 @@ class JSONEditorWidget(forms.Widget):
 
     template_name = 'django_json_editor/django_json_editor.html'
 
-    def __init__(self, schema):
+    def __init__(self, schema, collapsed=True):
         super().__init__()
         self._schema = schema
+        self._collapsed = int(collapsed)
 
     def render(self, name, value, attrs=None):
-        self._schema['title'] = ''
+        self._schema['title'] = name
+        self._schema['options'] = {'collapsed': 1}
+
         context = {
             'name': name,
             'schema': self._schema,
