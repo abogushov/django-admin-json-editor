@@ -14,7 +14,7 @@ class JSONEditorWidget(forms.Widget):
         self._schema = schema
 
     def render(self, name, value, attrs=None):
-        self._schema['title'] = name
+        self._schema['title'] = ''
         context = {
             'name': name,
             'schema': self._schema,
