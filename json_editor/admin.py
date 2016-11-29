@@ -1,4 +1,5 @@
 import json
+import copy
 
 from django import forms
 from django.utils.safestring import mark_safe
@@ -12,15 +13,20 @@ class JSONEditorWidget(forms.Widget):
     def __init__(self, schema, collapsed=True):
         super().__init__()
         self._schema = schema
-        self._collapsed = int(collapsed)
+        self._collapsed = collapsed
 
     def render(self, name, value, attrs=None):
-        self._schema['title'] = name
-        self._schema['options'] = {'collapsed': 1}
+        if callable(self._schema):
+            schema = self._schema(self)
+        else:
+            schema = copy.copy(self._schema)
+
+        schema['title'] = ' '
+        schema['options'] = {'collapsed': int(self._collapsed)}
 
         context = {
             'name': name,
-            'schema': self._schema,
+            'schema': schema,
             'data': json.loads(value),
         }
         return mark_safe(render_to_string(self.template_name, context))
