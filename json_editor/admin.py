@@ -1,6 +1,7 @@
 import json
 import copy
 
+import collections
 from django import forms
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
@@ -21,6 +22,8 @@ class JSONEditorWidget(forms.Widget):
         else:
             schema = copy.copy(self._schema)
 
+        self.schema_updater(schema)
+
         schema['title'] = ' '
         schema['options'] = {'collapsed': int(self._collapsed)}
 
@@ -30,6 +33,16 @@ class JSONEditorWidget(forms.Widget):
             'data': value,
         }
         return mark_safe(render_to_string(self.template_name, context))
+
+    @classmethod
+    def schema_updater(cls, nested):
+        """Updates schema to format allowed by JS"""
+        for key, value in nested.items():
+            if isinstance(value, collections.Mapping):
+                cls.schema_updater(value)
+            else:
+                # Replace bool values with integers
+                nested[key] = int(value) if isinstance(value, bool) else value
 
     class Media:
         css = {'all': (
