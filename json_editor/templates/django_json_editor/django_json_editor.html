@@ -14,7 +14,7 @@
     });
     {% if data %}
     var json = {{ data|safe }};
-    {{ name }}_editor.setValue(json)
+    {{ name }}_editor.setValue(json);
     {% endif %}
 </script>
 
