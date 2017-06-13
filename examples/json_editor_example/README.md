@@ -14,5 +14,5 @@ python manage.py runserver
 
 Open `http://localhost:8000/admin/app/jsonmodel/add/`. You will see:
 
-![Example](django-admin-json-editor/examples/json_editor_example/example.png)
+![Example](example.png)
 
