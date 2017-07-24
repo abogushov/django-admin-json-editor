@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from json_editor import JSONEditorWidget
+from django_admin_json_editor import JSONEditorWidget
 
 from .models import JSONModel
 

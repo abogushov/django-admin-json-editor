@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'json_editor',
+    'django_admin_json_editor',
 
     'app',
 ]

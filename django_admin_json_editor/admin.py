@@ -8,7 +8,7 @@ from django.template.loader import render_to_string
 
 class JSONEditorWidget(forms.Widget):
 
-    template_name = 'django_json_editor/django_json_editor.html'
+    template_name = 'django_admin_json_editor/editor.html'
 
     def __init__(self, schema, collapsed=True):
         super().__init__()
@@ -45,12 +45,12 @@ class JSONEditorWidget(forms.Widget):
 
     class Media:
         css = {'all': (
-            'django_json_editor/bootstrap/css/bootstrap.min.css',
-            'django_json_editor/fontawesome/css/font-awesome.min.css',
-            'django_json_editor/style.css',
+            'django_admin_json_editor/bootstrap/css/bootstrap.min.css',
+            'django_admin_json_editor/fontawesome/css/font-awesome.min.css',
+            'django_admin_json_editor/style.css',
         )}
         js = (
-            'django_json_editor/jquery/jquery.min.js',
-            'django_json_editor/bootstrap/js/bootstrap.min.js',
-            'django_json_editor/jsoneditor/jsoneditor.min.js',
+            'django_admin_json_editor/jquery/jquery.min.js',
+            'django_admin_json_editor/bootstrap/js/bootstrap.min.js',
+            'django_admin_json_editor/jsoneditor/jsoneditor.min.js',
         )

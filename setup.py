@@ -9,8 +9,8 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-admin-json-editor',
-    version='0.0.6',
-    packages=find_packages(),
+    version='0.1.0',
+    packages=['django_admin_json_editor'],
     include_package_data=True,
     license='MIT License',
     description='A simple Django app to add JSON widget into Django Administration.',
@@ -28,6 +28,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
