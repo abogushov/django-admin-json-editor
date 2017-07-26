@@ -6,7 +6,7 @@ To run example to this steps:
 python3 -m venv env
 . env/bin/activate
 pip install -r requirements.txt
-createdb json_editor_example
+createdb django_admin_json_editor
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
