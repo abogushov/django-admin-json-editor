@@ -1,4 +1,4 @@
 include LICENSE
-include README.rst
+include README.md
 recursive-include django_admin_json_editor/static *
 recursive-include django_admin_json_editor/templates *
