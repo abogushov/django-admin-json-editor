@@ -10,10 +10,11 @@ class JSONEditorWidget(forms.Widget):
 
     template_name = 'django_admin_json_editor/editor.html'
 
-    def __init__(self, schema, collapsed=True):
+    def __init__(self, schema, collapsed=True, sceditor=False):
         super().__init__()
         self._schema = schema
         self._collapsed = collapsed
+        self._sceditor = sceditor
 
     def render(self, name, value, attrs=None):
         if callable(self._schema):
@@ -30,6 +31,7 @@ class JSONEditorWidget(forms.Widget):
             'name': name,
             'schema': schema,
             'data': value,
+            'sceditor': int(self._sceditor),
         }
         return mark_safe(render_to_string(self.template_name, context))
 
@@ -43,14 +45,21 @@ class JSONEditorWidget(forms.Widget):
                 # Replace bool values with integers
                 nested[key] = int(value) if isinstance(value, bool) else value
 
-    class Media:
-        css = {'all': (
+    @property
+    def media(self):
+        css = {
+            'all': [
             'django_admin_json_editor/bootstrap/css/bootstrap.min.css',
             'django_admin_json_editor/fontawesome/css/font-awesome.min.css',
             'django_admin_json_editor/style.css',
-        )}
-        js = (
+            ]
+        }
+        js = [
             'django_admin_json_editor/jquery/jquery.min.js',
             'django_admin_json_editor/bootstrap/js/bootstrap.min.js',
             'django_admin_json_editor/jsoneditor/jsoneditor.min.js',
-        )
+        ]
+        if self._sceditor:
+            css['all'].append('django_admin_json_editor/sceditor/themes/default.min.css')
+            js.append('django_admin_json_editor/sceditor/jquery.sceditor.bbcode.min.js')
+        return forms.Media(css=css, js=js)

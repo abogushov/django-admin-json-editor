@@ -8,6 +8,7 @@
         schema: {{ schema|safe }}
     };
     var {{ name }}_editor = new JSONEditor(container, options);
+    JSONEditor.plugins.sceditor.emoticonsEnabled = {{ sceditor }};
     {{ name }}_editor.on('change', function () {
       var json = {{ name }}_editor.getValue();
       document.getElementById("id_{{ name }}").value = JSON.stringify(json);
