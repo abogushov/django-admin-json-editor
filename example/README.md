@@ -15,4 +15,3 @@ python manage.py runserver
 Open `http://localhost:8000/admin/app/jsonmodel/add/`. You will see:
 
 ![Example](example.png)
-

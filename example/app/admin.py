@@ -19,6 +19,14 @@ DATA_SCHEMA = {
             'title': 'Status',
             'type': 'boolean',
         },
+        'html': {
+            'title': 'HTML',
+            'type': 'string',
+            'format': 'html',
+            'options': {
+                'wysiwyg': 1,
+            }
+        },
     },
 }
 
@@ -28,7 +36,7 @@ class JSONModelAdminForm(forms.ModelForm):
         model = JSONModel
         fields = '__all__'
         widgets = {
-            'data': JSONEditorWidget(DATA_SCHEMA, collapsed=False),
+            'data': JSONEditorWidget(DATA_SCHEMA, collapsed=False, sceditor=True),
         }
 
 
