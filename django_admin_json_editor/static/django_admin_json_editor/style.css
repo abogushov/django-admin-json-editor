@@ -2,3 +2,10 @@
 .submit-row a.deletelink {
     height: 35px;
 }
+
+/*Styling for sceditor*/
+div.sceditor-container {
+    float: left;
+    width: 100% !important;
+    margin-bottom: 10px;
+}
