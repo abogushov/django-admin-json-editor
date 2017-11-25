@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django import forms
 
+from app.models import ArrayJSONModel
 from django_admin_json_editor import JSONEditorWidget
 
 from .models import JSONModel
@@ -64,10 +65,17 @@ class JSONModelAdminForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'data': JSONEditorWidget(DATA_SCHEMA, collapsed=False, sceditor=True),
-            'roles': JSONEditorWidget(HOST_ROLES_SCHEMA, collapsed=False),
         }
 
 
 @admin.register(JSONModel)
 class JSONModelAdmin(admin.ModelAdmin):
     form = JSONModelAdminForm
+
+
+@admin.register(ArrayJSONModel)
+class ArrayJSONModelAdmin(admin.ModelAdmin):
+    def get_form(self, request, obj=None, **kwargs):
+        widgets = {'roles': JSONEditorWidget(HOST_ROLES_SCHEMA, False)}
+        form = super().get_form(request, obj, widgets=widgets, **kwargs)
+        return form

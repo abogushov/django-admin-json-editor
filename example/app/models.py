@@ -8,4 +8,7 @@ class JSONModel(models.Model):
         'status': False,
         'html': '<h1>Default</h1>',
     })
+
+
+class ArrayJSONModel(models.Model):
     roles = JSONField(default=[])
