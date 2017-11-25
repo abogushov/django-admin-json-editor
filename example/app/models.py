@@ -8,3 +8,4 @@ class JSONModel(models.Model):
         'status': False,
         'html': '<h1>Default</h1>',
     })
+    roles = JSONField(default=[])

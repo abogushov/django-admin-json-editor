@@ -28,6 +28,31 @@ DATA_SCHEMA = {
             }
         },
     },
+    'required': ['text']
+}
+
+HOST_ROLES_SCHEMA = {
+    'type': 'array',
+    'title': 'roles',
+    'items': {
+        'type': 'object',
+        'required': [
+            'name',
+            'tag',
+        ],
+        'properties': {
+            'name': {
+                'title': 'Name',
+                'type': 'string',
+                'format': 'text',
+            },
+            'tag': {
+                'title': 'Tag',
+                'type': 'string',
+                'format': 'text',
+            }
+         }
+    }
 }
 
 
@@ -37,6 +62,7 @@ class JSONModelAdminForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'data': JSONEditorWidget(DATA_SCHEMA, collapsed=False, sceditor=True),
+            'roles': JSONEditorWidget(HOST_ROLES_SCHEMA, collapsed=False),
         }
 
 
