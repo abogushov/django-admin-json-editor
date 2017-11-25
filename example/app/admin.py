@@ -45,11 +45,13 @@ HOST_ROLES_SCHEMA = {
                 'title': 'Name',
                 'type': 'string',
                 'format': 'text',
+                'minLength': 1,
             },
             'tag': {
                 'title': 'Tag',
                 'type': 'string',
                 'format': 'text',
+                'minLength': 1,
             }
          }
     }
