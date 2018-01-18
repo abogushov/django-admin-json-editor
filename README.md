@@ -55,3 +55,29 @@ class JSONModelAdminForm(forms.ModelForm):
             'data': JSONEditorWidget(DATA_SCHEMA, collapsed=False),
         }
 ```
+
+### Dynamic schema
+
+It is possible to build dynamic schema for widget:
+
+```python
+def dynamic_schema(widget):
+    return {
+        'type': 'array',
+        'title': 'tags',
+        'items': {
+            'type': 'string',
+            'enum': [i for i in Tag.objects.values_list('name', flat=True)],
+        }
+    }
+```
+
+```python
+@admin.register(JSONModel)
+class JSONModelAdmin(admin.ModelAdmin):
+    def get_form(self, request, obj=None, **kwargs):
+        widget = JSONEditorWidget(dynamic_schema, False)
+        form = super().get_form(request, obj, widgets={'tags': widget}, **kwargs)
+        return form
+```
+

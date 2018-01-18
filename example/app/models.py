@@ -12,3 +12,7 @@ class JSONModel(models.Model):
 
 class ArrayJSONModel(models.Model):
     roles = JSONField(default=[])
+
+
+class Tag(models.Model):
+    name = models.CharField('name', max_length=10)
