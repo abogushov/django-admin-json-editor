@@ -10,7 +10,7 @@ class JSONEditorWidget(forms.Widget):
     template_name = 'django_admin_json_editor/editor.html'
 
     def __init__(self, schema, collapsed=True, sceditor=False):
-        super(JSONEditorWidget).__init__()
+        super(JSONEditorWidget, self).__init__()
         self._schema = schema
         self._collapsed = collapsed
         self._sceditor = sceditor
