@@ -1,0 +1,5 @@
+Contributors
+------------
+
+* Alexander Bogushov (https://github.com/abogushov)
+* Malik S (https://github.com/flyudvik)
