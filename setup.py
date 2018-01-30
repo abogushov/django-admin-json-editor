@@ -1,14 +1,14 @@
 import os
 import re
-from pathlib import Path
 from setuptools import setup
 
 
-project_path = Path(__file__).parent
+project_path = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(project_path, 'README.md'), 'r') as fout:
+    README = fout.read()
+with open(os.path.join(project_path, 'django_admin_json_editor', '__init__.py'), 'r') as fout:
+    version_text = fout.read()
 
-README = (project_path / 'README.md').read_text()
-
-version_text = (project_path / 'django_admin_json_editor' / '__init__.py').read_text()
 VERSION = re.compile(r'.*__version__ = \'(.*?)\'', re.S).match(version_text).group(1)
 
 # allow setup.py to be run from any path
