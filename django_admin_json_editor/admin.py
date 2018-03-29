@@ -4,6 +4,7 @@ import collections
 from django import forms
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
+import json
 
 
 class JSONEditorWidget(forms.Widget):
@@ -28,7 +29,7 @@ class JSONEditorWidget(forms.Widget):
 
         context = {
             'name': name,
-            'schema': schema,
+            'schema': json.dumps(schema),
             'data': value,
             'sceditor': int(self._sceditor),
         }
