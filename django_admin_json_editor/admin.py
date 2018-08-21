@@ -20,9 +20,7 @@ class JSONEditorWidget(forms.Widget):
         if callable(self._schema):
             schema = self._schema(self)
         else:
-            schema = copy.copy(self._schema)
-
-        self.schema_updater(schema)
+            schema = self._schema
 
         schema['title'] = ' '
         schema['options'] = {'collapsed': int(self._collapsed)}
@@ -34,16 +32,6 @@ class JSONEditorWidget(forms.Widget):
             'sceditor': int(self._sceditor),
         }
         return mark_safe(render_to_string(self.template_name, context))
-
-    @classmethod
-    def schema_updater(cls, nested):
-        """Updates schema to format allowed by JS"""
-        for key, value in nested.items():
-            if isinstance(value, collections.Mapping):
-                cls.schema_updater(value)
-            else:
-                # Replace bool values with integers
-                nested[key] = int(value) if isinstance(value, bool) else value
 
     @property
     def media(self):
