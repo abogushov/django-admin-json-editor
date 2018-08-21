@@ -10,11 +10,12 @@ import json
 class JSONEditorWidget(forms.Widget):
     template_name = 'django_admin_json_editor/editor.html'
 
-    def __init__(self, schema, collapsed=True, sceditor=False):
+    def __init__(self, schema, collapsed=True, sceditor=False, editor_options=None):
         super(JSONEditorWidget, self).__init__()
         self._schema = schema
         self._collapsed = collapsed
         self._sceditor = sceditor
+        self._editor_options = editor_options or {}
 
     def render(self, name, value, attrs=None, renderer=None):
         if callable(self._schema):
@@ -25,11 +26,18 @@ class JSONEditorWidget(forms.Widget):
         schema['title'] = ' '
         schema['options'] = {'collapsed': int(self._collapsed)}
 
+        editor_options = {
+            'theme': 'bootstrap3',
+            'iconlib': 'fontawesome4',
+            'schema': schema,
+        }
+        editor_options.update(self._editor_options)
+
         context = {
             'name': name,
-            'schema': json.dumps(schema),
             'data': value,
             'sceditor': int(self._sceditor),
+            'editor_options': json.dumps(editor_options),
         }
         return mark_safe(render_to_string(self.template_name, context))
 
