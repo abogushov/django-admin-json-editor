@@ -1,10 +1,8 @@
-import copy
+import json
 
-import collections
 from django import forms
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
-import json
 
 
 class JSONEditorWidget(forms.Widget):
