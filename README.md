@@ -7,8 +7,6 @@
 
 Application adds support for editing JSONField in Django Administration via https://github.com/jdorn/json-editor.
 
-![Example](example/example.png)
-
 ## Quick start
 
 Install application via pip:
