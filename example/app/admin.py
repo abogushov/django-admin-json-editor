@@ -3,7 +3,7 @@ from django import forms
 
 from django_admin_json_editor import JSONEditorWidget
 
-from .models import JSONModel, ArrayJSONModel, Tag
+from .models import JSONModel, ArrayJSONModel, Tag, OtherJSONModel, RelatedJSONModel
 
 
 DATA_SCHEMA = {
@@ -29,6 +29,40 @@ DATA_SCHEMA = {
         },
     },
     'required': ['text']
+}
+
+OTHER_DATA_SCHEMA = {
+    'type': 'object',
+    'title': 'Data',
+    'properties': {
+        'other_text': {
+            'title': 'Some other text',
+            'type': 'string',
+            'format': 'textarea',
+        },
+        'status': {
+            'title': 'Status',
+            'type': 'boolean',
+        },
+    },
+    'required': ['other_text']
+}
+
+RELATED_DATA_SCHEMA = {
+    'type': 'object',
+    'title': 'Data',
+    'properties': {
+        'related_info': {
+            'title': 'Some related info',
+            'type': 'string',
+            'format': 'textarea',
+        },
+        'relevant': {
+            'title': 'Relevant',
+            'type': 'boolean',
+        },
+    },
+    'required': ['related_info']
 }
 
 
@@ -84,3 +118,24 @@ class ArrayJSONModelAdmin(admin.ModelAdmin):
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     pass
+    
+    
+class RelatedJSONModelStackedInline(admin.StackedInline):
+    model = RelatedJSONModel
+    extra = 0
+    def get_formset(self, request, obj=None, **kwargs):
+        widgets = {
+            'related_data': JSONEditorWidget(RELATED_DATA_SCHEMA, False),
+        }
+        return super().get_formset(request, obj, widgets=widgets, **kwargs)
+        
+@admin.register(OtherJSONModel)
+class OtherJSONModelAdmin(admin.ModelAdmin):
+    inlines = [ RelatedJSONModelStackedInline, ]
+    def get_form(self, request, obj=None, **kwargs):
+        widgets = {
+            'data': JSONEditorWidget(OTHER_DATA_SCHEMA, collapsed=False),
+        }
+        return super().get_form(request, obj, widgets=widgets, **kwargs)
+
+    

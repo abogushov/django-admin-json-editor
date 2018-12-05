@@ -58,6 +58,7 @@ class JSONEditorWidget(forms.Widget):
             'django_admin_json_editor/jquery/jquery.min.js',
             'django_admin_json_editor/bootstrap/js/bootstrap.min.js',
             'django_admin_json_editor/jsoneditor/jsoneditor.min.js',
+            'django_admin_json_editor/editor.js',
         ]
         if self._sceditor:
             css['all'].append('django_admin_json_editor/sceditor/themes/default.min.css')
