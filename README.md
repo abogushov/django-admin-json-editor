@@ -82,3 +82,33 @@ class JSONModelAdmin(admin.ModelAdmin):
         return form
 ```
 
+### Django admin inlines
+
+JSONEditorWidget may be used also with django admin inlines,
+by overriding 
+
+1) the get_formset method of the StackedInline (or TabularInline) class, and 
+
+2) the get_form method of the ModelAdmin class, 
+
+like in the example below.
+
+
+```python
+class RelatedJSONModelStackedInline(admin.StackedInline):
+    model = RelatedJSONModel
+    def get_formset(self, request, obj=None, **kwargs):
+        widgets = {
+            'related_data': JSONEditorWidget(RELATED_DATA_SCHEMA, False),
+        }
+        return super().get_formset(request, obj, widgets=widgets, **kwargs)
+        
+@admin.register(MyJSONModel)
+class MyJSONModelAdmin(admin.ModelAdmin):
+    inlines = [ RelatedJSONModelStackedInline, ]
+    def get_form(self, request, obj=None, **kwargs):
+        widgets = {
+            'data': JSONEditorWidget(DATA_SCHEMA, collapsed=False),
+        }
+        return super().get_form(request, obj, widgets=widgets, **kwargs)
+```
