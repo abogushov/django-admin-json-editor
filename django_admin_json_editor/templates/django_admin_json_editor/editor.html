@@ -2,11 +2,7 @@
 
 <script>
     var container = document.getElementById("{{ name }}_editor");
-    var options = {
-        theme: "bootstrap3",
-        iconlib: "fontawesome4",
-        schema: {{ schema|safe }}
-    };
+    var options = {{ editor_options|safe }};
     var {{ name }}_editor = new JSONEditor(container, options);
     JSONEditor.plugins.sceditor.emoticonsEnabled = {{ sceditor }};
     {{ name }}_editor.on('change', function () {
