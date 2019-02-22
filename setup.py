@@ -14,6 +14,17 @@ VERSION = re.compile(r'.*__version__ = \'(.*?)\'', re.S).match(version_text).gro
 # allow setup.py to be run from any path
 os.chdir(project_path)
 
+requirements = [
+    'Django',
+]
+
+test_requirements = [
+    'pytest',
+    'pytest-runner',
+    'pytest-flake8',
+    'flake8-isort',
+]
+
 setup(
     name='django-admin-json-editor',
     version=VERSION,
@@ -35,8 +46,11 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
-    install_requires=['Django'],
+    install_requires=requirements,
+    test_suite='tests',
+    tests_require=test_requirements,
 )

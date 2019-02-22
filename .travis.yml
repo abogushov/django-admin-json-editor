@@ -1,17 +1,15 @@
-sudo: required
-
+dist: xenial
 language: python
-
+sudo: false
 python:
-  - "2.7"
-  - "3.5"
-  - "3.6"
-
+- 3.5
+- 3.6
+- 3.7
 install:
-  - pip install tox-travis
-
+- pip install -U pip setuptools
+- pip install pytest-runner
 script:
-  - tox
+- python setup.py test
 
 notifications:
   email:
