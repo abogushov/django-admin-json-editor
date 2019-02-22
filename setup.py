@@ -27,6 +27,7 @@ requirements = [
 
 test_requirements = [
     'pytest',
+    'pytest-django',
     'pytest-runner',
     'pytest-flake8',
     'flake8-isort',
