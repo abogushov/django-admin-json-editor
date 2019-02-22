@@ -6,8 +6,14 @@ project_path = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(project_path, 'README.md'), 'r') as fout:
     README = fout.read()
 
-with open(os.path.join(project_path, 'django_admin_json_editor', 'version.py'), 'r') as fout:
-    version = fout.read()
+
+version_file = os.path.join(project_path, 'django_admin_json_editor', 'version.py')
+
+if os.path.exists(version_file):
+    with open(version_file, 'r') as fout:
+        version = fout.read()
+else:
+    version = 'dev'
 
 # allow setup.py to be run from any path
 os.chdir(project_path)
