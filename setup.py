@@ -1,4 +1,6 @@
 import os
+import re
+
 from setuptools import setup
 
 
@@ -11,7 +13,8 @@ version_file = os.path.join(project_path, 'django_admin_json_editor', 'version.p
 
 if os.path.exists(version_file):
     with open(version_file, 'r') as fout:
-        version = fout.read()
+        version_text = fout.read()
+        version = re.compile(r'.*__version__ = \'(.*?)\'', re.S).match(version_text).group(1)
 else:
     version = 'dev'
 
