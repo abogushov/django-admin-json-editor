@@ -4,3 +4,4 @@ Contributors
 * Alexander Bogushov (https://github.com/abogushov)
 * Malik S (https://github.com/flyudvik)
 * mlevental (https://github.com/mlevental)
+* tapapax (https://github.com/tapapax)
