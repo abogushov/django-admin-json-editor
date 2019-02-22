@@ -10,8 +10,14 @@ install:
 - pip install pytest-runner
 script:
 - python setup.py test
-
-notifications:
-  email:
-    on_success: change
-    on_failure: always
+before_deploy:
+- echo "__version__ = '$(git describe --tags)'" > django_admin_json_editor/version.py
+deploy:
+  provider: pypi
+  user: abogushov
+  on:
+    tags: true
+    condition: "$TRAVIS_PYTHON_VERSION = 3.6"
+  skip_cleanup: true
+  password:
+    secure: Zz3au9EC3ahxdwnsiYEPpX8LNzP3bbdoyfM/7lZ1NS3dozRXemGhTTST2PxPmQ+ZolNoeItFOgIPq9MziDVSfuV2AarDG/rFMGw9dZHLOMFPC9Lm9ObEreHDyO8vSLkQGJn9kAkylMMf5RwoyADCRhgDZsXWDq9SGQF89RygMYryOcSPrEJb9d3ZNs1bv8ZT5WhpU8zYdmg0rc/5FIUb/qntoIRuIfEzaF3US8yuF9O43zrUREDZQWedXCBcUGXuyj7x/z0Nnsgex3dbIL1IdHUyPwgP6dC++pc9McHritbUrOtH7tvBWDGjsax4Lo9eeE0n3nG3btyJfmhf8hhPeqrpf3Ag7EKfbvkD7JZWOESgjG+fkcbmYLjTAFS2YENwIhd2V9zftiCn/k5RwCCj1941/0Jt78pvME+XaLVCSKfs7CePCqQu/zSNmQ4Ac1pb9/ipxkM8Qk87N7Lz2eutiZH+UiqHENaa8JwMp2iLN4QdzYeTAcMpOpqkv2J+FISHzV4s5erVdlaIvJcfRx2VBuHKhYrPzxo7wtOPJ3FA4+lFqsXTfoMZZnf0aUQZ0CHO3cIeU62gZ7vFNtFk+FtnYiU6RVvtddO5EEoOiwifPQ06u44bBBq6My+vp3i5veC711ULZjP1yZKvKI3c0/Zo2reCI9owhBgliqfZVA9cDh0=

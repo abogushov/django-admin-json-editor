@@ -1,5 +1,4 @@
 import os
-import re
 from setuptools import setup
 
 
@@ -9,7 +8,7 @@ with open(os.path.join(project_path, 'README.md'), 'r') as fout:
 with open(os.path.join(project_path, 'django_admin_json_editor', '__init__.py'), 'r') as fout:
     version_text = fout.read()
 
-VERSION = re.compile(r'.*__version__ = \'(.*?)\'', re.S).match(version_text).group(1)
+version = __import__('django_admin_json_editor').__version__
 
 # allow setup.py to be run from any path
 os.chdir(project_path)
@@ -27,7 +26,7 @@ test_requirements = [
 
 setup(
     name='django-admin-json-editor',
-    version=VERSION,
+    version=version,
     packages=['django_admin_json_editor'],
     include_package_data=True,
     license='MIT License',
