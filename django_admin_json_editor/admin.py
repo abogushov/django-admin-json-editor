@@ -13,7 +13,12 @@ class JSONEditorWidget(forms.Widget):
         self._schema = schema
         self._collapsed = collapsed
         self._sceditor = sceditor
-        self._editor_options = editor_options or {}
+
+        self._editor_options = {
+            'theme': 'bootstrap3',
+            'iconlib': 'fontawesome4',
+        }
+        self._editor_options.update(editor_options or {})
 
     def render(self, name, value, attrs=None, renderer=None):
         if callable(self._schema):
@@ -24,12 +29,8 @@ class JSONEditorWidget(forms.Widget):
         schema['title'] = ' '
         schema['options'] = {'collapsed': int(self._collapsed)}
 
-        editor_options = {
-            'theme': 'bootstrap3',
-            'iconlib': 'fontawesome4',
-            'schema': schema,
-        }
-        editor_options.update(self._editor_options)
+        editor_options = self._editor_options.copy()
+        editor_options['schema'] = schema
 
         context = {
             'name': name,
@@ -43,16 +44,19 @@ class JSONEditorWidget(forms.Widget):
     def media(self):
         css = {
             'all': [
-                'django_admin_json_editor/bootstrap/css/bootstrap.min.css',
                 'django_admin_json_editor/fontawesome/css/font-awesome.min.css',
                 'django_admin_json_editor/style.css',
             ]
         }
         js = [
-            'django_admin_json_editor/jquery/jquery.min.js',
-            'django_admin_json_editor/bootstrap/js/bootstrap.min.js',
             'django_admin_json_editor/jsoneditor/jsoneditor.min.js',
         ]
+
+        if self._editor_options['theme'] == 'bootstrap3':
+            css['all'].append('django_admin_json_editor/bootstrap/css/bootstrap.min.css')
+            js.append('django_admin_json_editor/jquery/jquery.min.js')
+            js.append('django_admin_json_editor/bootstrap/js/bootstrap.min.js')
+
         if self._sceditor:
             css['all'].append('django_admin_json_editor/sceditor/themes/default.min.css')
             js.append('django_admin_json_editor/sceditor/jquery.sceditor.bbcode.min.js')
