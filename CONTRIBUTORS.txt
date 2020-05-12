@@ -5,3 +5,4 @@ Contributors
 * Malik S (https://github.com/flyudvik)
 * mlevental (https://github.com/mlevental)
 * tapapax (https://github.com/tapapax)
+* Riccardo Magliocchetti (https://github.com/xrmx)
