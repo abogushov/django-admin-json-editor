@@ -25,12 +25,13 @@ requirements = [
     'Django',
 ]
 
+setup_requires = [
+    'pytest-runner',
+]
+
 test_requirements = [
     'pytest',
     'pytest-django',
-    'pytest-runner',
-    'pytest-flake8',
-    'flake8-isort',
 ]
 
 setup(
@@ -60,5 +61,6 @@ setup(
     ],
     install_requires=requirements,
     test_suite='tests',
+    setup_requires=setup_requires,
     tests_require=test_requirements,
 )
