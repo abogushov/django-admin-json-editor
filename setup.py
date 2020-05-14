@@ -42,6 +42,7 @@ setup(
     license='MIT License',
     description='A simple Django app to add JSON widget into Django Administration.',
     long_description=README,
+    long_description_content_type='text/markdown',
     url='https://github.com/abogushov/django-admin-json-editor',
     author='Alexander Bogushov',
     author_email='abogushov@gmail.com',
