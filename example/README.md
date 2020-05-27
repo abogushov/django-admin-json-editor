@@ -3,6 +3,7 @@
 To run example to this steps:
 
 ```bash
+cd example
 python3 -m venv env
 . env/bin/activate
 pip install -r requirements.txt

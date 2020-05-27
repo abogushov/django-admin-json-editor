@@ -64,7 +64,7 @@ class JSONModelAdminForm(forms.ModelForm):
         model = JSONModel
         fields = '__all__'
         widgets = {
-            'data': JSONEditorWidget(DATA_SCHEMA, collapsed=False, sceditor=True),
+            'data': JSONEditorWidget(DATA_SCHEMA, collapsed=False),
         }
 
 

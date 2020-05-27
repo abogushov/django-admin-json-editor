@@ -11,7 +11,7 @@ class JSONModel(models.Model):
 
 
 class ArrayJSONModel(models.Model):
-    roles = JSONField(default=[])
+    roles = JSONField(default=list)
 
 
 class Tag(models.Model):
