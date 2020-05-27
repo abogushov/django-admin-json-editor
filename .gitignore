@@ -56,6 +56,8 @@ docs/_build/
 # PyBuilder
 target/
 
+.DS_Store
+
 
 django_admin_json_editor/version.py
 .python-version
