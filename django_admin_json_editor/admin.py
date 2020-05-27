@@ -15,7 +15,7 @@ class JSONEditorWidget(forms.Widget):
         self._sceditor = sceditor
 
         self._editor_options = {
-            'theme': 'bootstrap3',
+            'theme': 'bootstrap4',
             'iconlib': 'fontawesome4',
         }
         self._editor_options.update(editor_options or {})
@@ -35,7 +35,6 @@ class JSONEditorWidget(forms.Widget):
         context = {
             'name': name,
             'data': value,
-            'sceditor': int(self._sceditor),
             'editor_options': json.dumps(editor_options),
         }
         return mark_safe(render_to_string(self.template_name, context))
@@ -52,10 +51,10 @@ class JSONEditorWidget(forms.Widget):
             'django_admin_json_editor/jsoneditor/jsoneditor.min.js',
         ]
 
-        if self._editor_options['theme'] == 'bootstrap3':
+        if self._editor_options['theme'] == 'bootstrap4':
             css['all'].append('django_admin_json_editor/bootstrap/css/bootstrap.min.css')
-            js.append('django_admin_json_editor/jquery/jquery.min.js')
-            js.append('django_admin_json_editor/bootstrap/js/bootstrap.min.js')
+            js.append('django_admin_json_editor/jquery/jquery-3.5.1.slim.min.js')
+            js.append('django_admin_json_editor/bootstrap/js/bootstrap.bundle.min.js')
 
         if self._sceditor:
             css['all'].append('django_admin_json_editor/sceditor/themes/default.min.css')

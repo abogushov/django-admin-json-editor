@@ -4,7 +4,6 @@
     var container = document.getElementById("{{ name }}_editor");
     var options = {{ editor_options|safe }};
     var {{ name }}_editor = new JSONEditor(container, options);
-    JSONEditor.plugins.sceditor.emoticonsEnabled = {{ sceditor }};
     {{ name }}_editor.on('change', function () {
         var errors = {{ name }}_editor.validate();
         if (errors.length) {
