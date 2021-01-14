@@ -82,3 +82,30 @@ class JSONModelAdmin(admin.ModelAdmin):
         return form
 ```
 
+
+## Fieldsets and Rendering Fix
+To fix django css issues, due to the fieldset "aligned" css class, we have added 2 options.
+
+JSONEditorWidget can be initialised with independent_fieldset (True/False). If you are putting the json editor in
+a seperate fieldset (preferred), you should pass independent_fieldset = True
+
+```python
+class JSONModelAdminForm(forms.ModelForm):
+    class Meta:
+        model = JSONModel
+        fields = '__all__'
+        widgets = {
+            'data': JSONEditorWidget(DATA_SCHEMA, collapsed=False, independent_fieldset=True),
+        }
+```
+Having an independent fieldset allows the relative position of the fields to be maintained as is.
+
+independent_fieldset=True removes the "aligned" class from the parent fieldset, which can break the rendering for other fields
+if the json editor is not put in an independent fieldset.
+
+In case you do not create independent fieldset and don't pass independent_fieldset=True, then the initialization of the
+editor would push the editor out of the default fieldset, which would break the default ordering of fields,
+and also push the editor at the end of the page.
+
+See example app.
+

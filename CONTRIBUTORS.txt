@@ -6,3 +6,4 @@ Contributors
 * mlevental (https://github.com/mlevental)
 * tapapax (https://github.com/tapapax)
 * Riccardo Magliocchetti (https://github.com/xrmx)
+* Karan Gupta (https://github.com/karangupta31)
