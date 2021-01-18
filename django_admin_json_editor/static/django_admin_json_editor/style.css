@@ -9,3 +9,8 @@ div.sceditor-container {
     width: 100% !important;
     margin-bottom: 10px;
 }
+
+/*Remove django list styling*/
+ul li {
+    list-style-type: none;
+}

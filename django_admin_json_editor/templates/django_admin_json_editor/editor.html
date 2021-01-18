@@ -1,7 +1,17 @@
 <div id="{{ name }}_editor"></div>
 
 <script>
+    $$ = django.jQuery
     var container = document.getElementById("{{ name }}_editor");
+    var parent_fieldset = $$("#{{ name }}_editor").closest("fieldset");
+    {% if independent_fieldset %}  // Preferred way to keep relative positions of the fields
+         // Removes the aligned class from the parent fieldset to remove the affects of "aligned" class on the editor
+         parent_fieldset.removeClass("aligned")
+    {% else %}
+        // Moves json editor outside of django fieldset to remove the affect of "aligned" class (but changes the relative position of fields)
+        parent_fieldset.after($$("#{{ name }}_editor").parent())
+    {% endif %}
+
     var options = {{ editor_options|safe }};
     var {{ name }}_editor = new JSONEditor(container, options);
     {{ name }}_editor.on('change', function () {

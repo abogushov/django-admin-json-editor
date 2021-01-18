@@ -64,13 +64,23 @@ class JSONModelAdminForm(forms.ModelForm):
         model = JSONModel
         fields = '__all__'
         widgets = {
-            'data': JSONEditorWidget(DATA_SCHEMA, collapsed=False),
+            'data': JSONEditorWidget(DATA_SCHEMA, collapsed=False, independent_fieldset=True),
         }
 
 
 @admin.register(JSONModel)
 class JSONModelAdmin(admin.ModelAdmin):
     form = JSONModelAdminForm
+
+    # Giving the JSON Editor independent field set
+    def get_fieldsets(self, *args, **kwargs):
+        fieldsets = super(JSONModelAdmin, self).get_fieldsets(*args, **kwargs)
+        default_field = fieldsets[0][1]['fields']
+        new_fields = ('data',)
+        # Removing used fields
+        [default_field.remove(field) for field in new_fields]
+        fieldsets.append((None, {'fields': new_fields}))
+        return fieldsets
 
 
 @admin.register(ArrayJSONModel)
