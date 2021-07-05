@@ -9,3 +9,11 @@ div.sceditor-container {
     width: 100% !important;
     margin-bottom: 10px;
 }
+
+/*Fixes for property selector*/
+.property-selector label {
+    float: none;
+}
+.property-selector .form-check-label:after {
+    display: none  !important;
+}
