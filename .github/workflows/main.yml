@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+      - develop
+  tags:
+    - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
+          - 3.10
+          - 3.11
+
+    steps:
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools
+          pip install pytest-runner
+
+      - name: Test
+        run: python setup.py test
+
+      # - name: Set version file
+      #   run: echo "__version__ = '$(git describe --tags)'" > django_admin_json_editor/version.py
+
+      # - name: Deploy to PyPI
+      #   if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags') && matrix.python-version == '3.6' }}
+      #   env:
+      #     TWINE_USERNAME: abogushov
+      #     TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      #   run: |
+      #     python -m pip install --upgrade pip setuptools wheel
+      #     python setup.py sdist bdist_wheel
+      #     python -m pip install --upgrade twine
+      #     twine upload dist/*
